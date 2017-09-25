@@ -2,8 +2,8 @@
 This project is used for collecting historical posts from a given wechat public account. The original idea is borrowed from [fst034356](https://github.com/fst034356/crawler/tree/master/wechat). However in this repo, another rest point `getmsg` is found and used to get posts by json. It could be faster than the original script, which is using PhantomJS to scroll and fetch more posts.
 
 ### Dependencies
-selenium
-[Chrome WebDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+- selenium
+- [Chrome WebDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 
 ### how to get the history from a wechat public account
 1. install fiddler and wechat for windows/mac
