@@ -12,6 +12,8 @@ This project is used for collecting historical posts from a given wechat public 
 4. In fiddler, copy `__biz`, `uin`, `key`, `pass_ticket` into json file. You can save it by wechat name for easy organization
 5. Run the script `python wechat_history.py {json file path}`
 
+Note: `uin` and `pass_ticket` can be reused on one machine. `__biz` stands for each unique account, so it will be different for different wechat account. `key` is updated every 2 hours or so, it is recommended to get a new key when rerunning the script after a long time.
+
 ### TODOs
 1. Save message list
 2. update message list by time
