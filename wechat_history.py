@@ -5,6 +5,7 @@ actions in this script:
    cookies are then saved.
 3. open the account posts by making requests to getmsg
 4. loop over the getmsg page until no more message to load
+5. save message to csv file in the same directory of the json file
 """
 import json
 from selenium import webdriver
