@@ -8,6 +8,8 @@ actions in this script:
 """
 import json
 from selenium import webdriver
+import os
+from datetime import datetime
 
 
 _CHROME = webdriver.Chrome(r'c:\temp\chromedriver.exe')
@@ -135,6 +137,28 @@ def get_all_messages(account_info):
             return messages
 
 
+def save_messages_to_csv(messages, account_json_path):
+    """ save messages into csv """
+    path, name = os.path.split(os.path.abspath(account_json_path))
+    output_csv = os.path.join(path, '{}.csv'.format(name.split('.')[0]))
+
+    with open(output_csv, 'w', encoding='utf-8') as outfile:
+        outfile.write('publish time, title, url\n')
+
+        for msg in messages:
+            # get message posting time
+            try:
+                pub_timestamp = msg.get('comm_msg_info').get('datetime')
+                pub_dt = str(datetime.utcfromtimestamp(pub_timestamp))
+
+                title = msg.get('app_msg_ext_info').get('title')
+                url = msg.get('app_msg_ext_info').get('content_url')
+
+                outfile.write('{}, {}, {}\n'.format(pub_dt, title, url))
+            except (KeyError, AttributeError) as e:
+                pass
+
+
 def main(account_json):
     account_info = get_account_info(account_json)
     home_url = construct_home_url(account_info)
@@ -143,6 +167,8 @@ def main(account_json):
     print('{} messages collected'.format(len(messages)))
     print('This is the most recent one:')
     print(messages[0])
+
+    save_messages_to_csv(messages, account_json)
 
 
 if __name__ == '__main__':
